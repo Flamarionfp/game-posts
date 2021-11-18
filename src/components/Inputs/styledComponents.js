@@ -50,3 +50,9 @@ export const IconInput = styled(Icon)({
   bottom: 15,
   left: 15,
 });
+
+export const EyeIcon = styled(Icon)({
+  position: 'absolute',
+  bottom: 15,
+  right: 20,
+});

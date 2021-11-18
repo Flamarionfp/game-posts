@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import Header from 'components/Header/Header';
-import Screen from 'components/Screen';
 import Title from 'components/Title/Title';
 import Card from 'components/Card/Card';
 import Posts from './Posts';
-import {Center, ContainerRow, DefaultText} from 'styles/globalStyledComponents';
+import {Center} from 'styles/globalStyledComponents';
 import {
   TitleContainer,
   PostsContainer,
-  MusicInfoContainer,
   RoundedIconContainer,
   AddMusicContainer,
 } from './styledComponents';
@@ -21,8 +19,8 @@ import ListSeparator from 'components/ListSeparator/ListSeparator';
 const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
 
-  const { name } = route.params;
-  console.log(name)
+  // const {user} = route.params;
+  console.log(name);
 
   const getPosts = async () => {
     try {
@@ -46,15 +44,18 @@ const Home = ({route, navigation}) => {
           <>
             <TitleContainer>
               <Center>
-                <Title title={`Olá, ${name}`} />
+                <Title title={`Olá, fff`} />
               </Center>
             </TitleContainer>
             <PostsContainer>
               <FlatList
-                ItemSeparatorComponent={ListSeparator}
                 data={post}
                 keyExtractor={item => `${item.id}`}
                 renderItem={item => <Posts post={item} />}
+                ItemSeparatorComponent={ListSeparator}
+                ListFooterComponent={
+                  <View style={{height: 0, marginBottom: 200}} />
+                }
               />
             </PostsContainer>
             <AddMusicContainer>

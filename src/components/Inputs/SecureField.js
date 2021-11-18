@@ -1,5 +1,6 @@
-import React from 'react';
-import {Label, FieldCustom, IconInput} from './styledComponents';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {Label, FieldCustom, IconInput, EyeIcon} from './styledComponents';
 
 const Field = ({
   label = 'Senha',
@@ -12,6 +13,9 @@ const Field = ({
   iconName = '',
   status = 'normal',
 }) => {
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
   return (
     <>
       <Label>{label}</Label>
@@ -19,6 +23,7 @@ const Field = ({
         value={value}
         onChangeText={onFunction}
         placeholder="••••••••"
+        secureTextEntry={!isPasswordVisible}
         placeholderTextColor="#9C9999"
         autoComplete="off"
         textContentType="password"
@@ -26,7 +31,11 @@ const Field = ({
         autoCorrect={false}
         status={status}
       />
+
       <IconInput name="lock-question" size={25} color="#000" />
+      <TouchableOpacity onPress={() => {setIsPasswordVisible(!isPasswordVisible)}}>
+        <EyeIcon name={isPasswordVisible ? 'eye-off' : 'eye'} size={25} color="#000" />
+      </TouchableOpacity>
     </>
   );
 };

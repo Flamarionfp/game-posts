@@ -36,28 +36,28 @@ const Login = ({navigation}) => {
   });
 
   const login = async () => {
-    navigation.navigate('Home', {name: 'Flamarion'})
-    // if (validateEmail(data.email).hasError) {
-    //   setEmailError({hasError: true, msg: validateEmail(data.email).msg});
-    //   return;
-    // }
+    if (validateEmail(data.email).hasError) {
+      setEmailError({hasError: true, msg: validateEmail(data.email).msg});
+      return;
+    }
 
-    // if (data.senha.length === 0) {
-    //   setPasswordError({hasError: true, msg: 'Senha inválida'});
-    //   return;
-    // }
+    if (data.senha.length === 0) {
+      setPasswordError({hasError: true, msg: 'Senha inválida'});
+      return;
+    }
 
-    // const response = await api.post('login', data);
-    // if (response.data.success) {
-    //   setEmailError({hasError: false, msg: ''});
-    //   setPasswordError({hasError: false, msg: ''});
-    //   setHasError({status: false, msg: ''});
-    //   navigation.navigate('Home');
-    // } else {
-    //   setEmailError({hasError: false, msg: ''});
-    //   setPasswordError({hasError: false, msg: ''});
-    //   setHasError({status: true, msg: response.data.msg});
-    // }
+    const response = await api.post('login', data);
+    if (response.data.success) {
+      console.log(response)
+      setEmailError({hasError: false, msg: ''});
+      setPasswordError({hasError: false, msg: ''});
+      setHasError({status: false, msg: ''});
+      navigation.navigate('Home');
+    } else {
+      setEmailError({hasError: false, msg: ''});
+      setPasswordError({hasError: false, msg: ''});
+      setHasError({status: true, msg: response.data.msg});
+    }
   };
 
   return (
