@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Dimensions, Image, View} from 'react-native';
 import {Formik} from 'formik';
 import Screen from 'components/Screen';
@@ -23,6 +23,7 @@ const SignupMusic = ({navigation}) => {
   const [imgBase64, setImgBase64] = useState('');
   const [game, setGame] = useState('');
   const [description, setDescription] = useState('');
+  const [isButtonEnable, setIsButtonEnable] = useState(false);
 
   const uploadImage = data => {
     if (data.didCancel) {
@@ -62,65 +63,73 @@ const SignupMusic = ({navigation}) => {
     }
   };
 
+  useEffect(() => {
+    if (imgBase64.length === 0 || game.length === 0) {
+      setIsButtonEnable(false);
+    } else {
+      setIsButtonEnable(true);
+    }
+  }, [imgBase64, game]);
+
   return (
     <Screen isScrollable center>
-        <Center>
-          <ImageUploadContainer
-            onPress={() =>
-              ImagePicker.launchImageLibrary(configPhoto, uploadImage)
-            }>
-            {photo ? (
-              <>
-                <Image
-                  style={{width: 150, height: 150, borderRadius: 6}}
-                  source={{uri: photo.uri}}
-                />
-                <View style={{marginHorizontal: 5, marginTop: 10}}>
-                  <Title fontSize={18} title="Escolher outra imagem" />
-                </View>
-              </>
-            ) : (
-              <>
-                <Icon name="image" size={55} />
-                <Title fontSize={18} title="Enviar Imagem" />
-              </>
-            )}
-          </ImageUploadContainer>
-        </Center>
-        <View>
-          <InputContainer>
-            <Field
-              value={game}
-              maxLength={45}
-              onFunction={value => setGame(value)}
-              label="Jogo*"
-              placeholder="Ex: God of War II"
-              iconName="google-controller"
-            />
-          </InputContainer>
-          <InputContainer>
-            <Field
-              value={description}
-              multiline
-              numberOfLines={15}
-              maxLength={1000}
-              onFunction={value => setDescription(value)}
-              label="Descrição"
-              placeholder="Digite uma descrição para sua imagem..."
-              iconName="account-music"
-            />
-          </InputContainer>
+      <Center>
+        <ImageUploadContainer
+          onPress={() =>
+            ImagePicker.launchImageLibrary(configPhoto, uploadImage)
+          }>
+          {photo ? (
+            <>
+              <Image
+                style={{width: 150, height: 150, borderRadius: 6}}
+                source={{uri: photo.uri}}
+              />
+              <View style={{marginHorizontal: 5, marginTop: 10}}>
+                <Title fontSize={18} title="Escolher outra imagem" />
+              </View>
+            </>
+          ) : (
+            <>
+              <Icon name="image" size={55} />
+              <Title fontSize={18} title="Enviar Imagem" />
+            </>
+          )}
+        </ImageUploadContainer>
+      </Center>
+      <View>
+        <InputContainer>
+          <Field
+            value={game}
+            maxLength={45}
+            onFunction={value => setGame(value)}
+            label="Jogo*"
+            placeholder="Ex: God of War II"
+            iconName="google-controller"
+          />
+        </InputContainer>
+        <InputContainer>
+          <Field
+            value={description}
+            multiline
+            numberOfLines={15}
+            maxLength={1000}
+            onFunction={value => setDescription(value)}
+            label="Descrição"
+            placeholder="Digite uma descrição para sua imagem..."
+            iconName="account-music"
+          />
+        </InputContainer>
 
-          <ContainerButton>
-            <Button
-              disabled
-              title="Enviar"
-              onFunction={() => {
-                signupPost();
-              }}
-            />
-          </ContainerButton>
-        </View>
+        <ContainerButton>
+          <Button
+            disabled={!isButtonEnable}
+            title="Enviar"
+            onFunction={() => {
+              signupPost();
+            }}
+          />
+        </ContainerButton>
+      </View>
     </Screen>
   );
 };
