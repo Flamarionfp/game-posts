@@ -103,6 +103,7 @@ const Login = ({navigation}) => {
 
           <ButtonContainer>
             <Button
+              disabled
               onFunction={() => {
                 login();
               }}

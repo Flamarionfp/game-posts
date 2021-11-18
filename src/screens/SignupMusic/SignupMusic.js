@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, View} from 'react-native';
+import {Dimensions, Image, View} from 'react-native';
 import {Formik} from 'formik';
 import Screen from 'components/Screen';
 import Header from 'components/Header/Header';
@@ -63,74 +63,64 @@ const SignupMusic = ({navigation}) => {
   };
 
   return (
-    <Screen isScrollable>
-      <Center>
-        {!photo ? (
-          <>
-            <Header hasTitle={false} />
-            <TitleContainer>
-              <Title title="FAZER POSTAGEM" />
-            </TitleContainer>
-          </>
-        ) : (
-          <View />
-        )}
+    <Screen isScrollable center>
+        <Center>
+          <ImageUploadContainer
+            onPress={() =>
+              ImagePicker.launchImageLibrary(configPhoto, uploadImage)
+            }>
+            {photo ? (
+              <>
+                <Image
+                  style={{width: 150, height: 150, borderRadius: 6}}
+                  source={{uri: photo.uri}}
+                />
+                <View style={{marginHorizontal: 5, marginTop: 10}}>
+                  <Title fontSize={18} title="Escolher outra imagem" />
+                </View>
+              </>
+            ) : (
+              <>
+                <Icon name="image" size={55} />
+                <Title fontSize={18} title="Enviar Imagem" />
+              </>
+            )}
+          </ImageUploadContainer>
+        </Center>
+        <View>
+          <InputContainer>
+            <Field
+              value={game}
+              maxLength={45}
+              onFunction={value => setGame(value)}
+              label="Jogo*"
+              placeholder="Ex: God of War II"
+              iconName="google-controller"
+            />
+          </InputContainer>
+          <InputContainer>
+            <Field
+              value={description}
+              multiline
+              numberOfLines={15}
+              maxLength={1000}
+              onFunction={value => setDescription(value)}
+              label="Descrição"
+              placeholder="Digite uma descrição para sua imagem..."
+              iconName="account-music"
+            />
+          </InputContainer>
 
-        <ImageUploadContainer
-          onPress={() =>
-            ImagePicker.launchImageLibrary(configPhoto, uploadImage)
-          }>
-          {photo ? (
-            <>
-              <Image
-                style={{width: 150, height: 150, borderRadius: 6}}
-                source={{uri: photo.uri}}
-              />
-              <View style={{marginHorizontal: 5, marginTop: 10}}>
-                <Title fontSize={18} title="Escolher outra imagem" />
-              </View>
-            </>
-          ) : (
-            <>
-              <Icon name="image" size={55} />
-              <Title fontSize={18} title="Enviar Imagem" />
-            </>
-          )}
-        </ImageUploadContainer>
-      </Center>
-      <View>
-        <InputContainer>
-          <Field
-            value={game}
-            maxLength={45}
-            onFunction={value => setGame(value)}
-            label="Jogo*"
-            placeholder="Ex: God of War II"
-            iconName="google-controller"
-          />
-        </InputContainer>
-        <InputContainer>
-          <Field
-            value={description}
-            multiline
-            numberOfLines={15}
-            maxLength={1000}
-            onFunction={value => setDescription(value)}
-            label="Descrição"
-            placeholder="Digite uma descrição para sua imagem..."
-            iconName="account-music"
-          />
-        </InputContainer>
-
-        <ContainerButton>
-          <Button
-            title="Enviar"
-            onFunction={() => {
-              signupPost();
-            }}
-          />
-        </ContainerButton>
-      </View>
+          <ContainerButton>
+            <Button
+              disabled
+              title="Enviar"
+              onFunction={() => {
+                signupPost();
+              }}
+            />
+          </ContainerButton>
+        </View>
     </Screen>
   );
 };

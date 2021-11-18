@@ -10,6 +10,7 @@ export const Container = styled(TouchableOpacity)(props => ({
   backgroundColor: props.bg || Colors.primaryColor,
   height: 50,
   borderRadius: 8,
+  opacity: props.disabled ? 0.5 : 1,
   alignItems: 'center',
   justifyContent: 'center',
 }));
