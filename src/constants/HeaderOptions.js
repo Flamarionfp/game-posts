@@ -1,11 +1,7 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import {Colors} from './Colors';
 
 const HomeHeaderOptions = {
-  title: 'GAME PICTURES',
+  title: 'GAME POSTS',
   headerShown: true,
   headerStyle: {
     backgroundColor: Colors.primaryColor,

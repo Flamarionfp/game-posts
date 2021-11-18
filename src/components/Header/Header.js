@@ -3,7 +3,7 @@ import {ContainerTitle, ContainerImage, Logo} from './styledComponents';
 import Title from 'components/Title/Title';
 
 const Header = ({
-  title = 'GAME PICTURES',
+  title = 'GAME POSTS',
   hasTitle = true,
   hasLogo = true,
 }) => {

@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import styled from 'styled-components';
 import {View, TouchableOpacity} from 'react-native';
 
@@ -10,7 +6,8 @@ export const TitleContainer = styled(View)({
 });
 
 export const ImageUploadContainer = styled(TouchableOpacity)({
-  marginVertical: 15,
+  marginTop: 50,
+  marginBottom: 15,
   alignItems: 'center',
   justifyContent: 'center',
 });
