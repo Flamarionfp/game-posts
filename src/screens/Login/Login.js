@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
   });
 
   const login = async () => {
-    navigation.navigate('Home')
+    navigation.navigate('Home', {name: 'Flamarion'})
     // if (validateEmail(data.email).hasError) {
     //   setEmailError({hasError: true, msg: validateEmail(data.email).msg});
     //   return;

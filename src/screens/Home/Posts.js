@@ -1,33 +1,48 @@
-import React, {useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Image, Text, View, ScrollView} from 'react-native';
 import {ContainerRow, DefaultText} from 'styles/globalStyledComponents';
 import {
   RoundedIconContainer,
   MusicInfoContainer,
   Author,
   Game,
+  ImageContainer,
+  ContainerDescription,
 } from './styledComponents';
 import {Colors} from 'constants/Colors';
 import {capitalize} from '@brazilian-utils/brazilian-utils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Container } from 'components/Button/styledComponents';
+import {Container} from 'components/Button/styledComponents';
+import Screen from 'components/Screen';
 
 const Posts = ({post}) => {
-  const [image, setImage] = useState()
-
+  const [image, setImage] = useState();
   const {autor, jogo, imagem, descricao} = post.item;
 
-  // const imageBuffer = Buffer.from(JSON.stringify(imagem.data)) // This res.data is the whole object, including the type "Buffer" and the data array
-  // const imageBase64 = imageBuffer.toString('base64')
-  // setImage(imageBase64)
-  // console.log(imageBase64)
+  useEffect(() => {
+    setImage(imagem);
+  });
 
   return (
     <>
-      <ContainerRow>
+      <ContainerRow style={{marginHorizontal: 5}}>
         <Author>{autor}</Author>
-        <Game>- {jogo}</Game>
+        <Game> - {jogo}</Game>
       </ContainerRow>
+      <ImageContainer>
+        <Image
+          style={{
+            width: '100%',
+            height: 250,
+          }}
+          source={{
+            uri: `data:image/jpeg;base64,${image}`,
+          }}
+        />
+      </ImageContainer>
+      <ContainerDescription>
+        <Text>{descricao}</Text>
+      </ContainerDescription>
     </>
   );
 };

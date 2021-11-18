@@ -19,8 +19,12 @@ export const Game = styled(Text)({
   color: '#6666',
 });
 
-export const MusicInfoContainer = styled(View)({
-  marginVertical: 5,
+export const ImageContainer = styled(View)({
+  marginVertical: 10,
+});
+
+export const ContainerDescription = styled(View)({
+  marginHorizontal: 5,
 });
 
 export const PostsContainer = styled(View)({

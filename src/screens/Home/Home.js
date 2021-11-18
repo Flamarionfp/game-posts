@@ -16,9 +16,13 @@ import {
 import {Colors} from 'constants/Colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 import api from 'services/api';
+import ListSeparator from 'components/ListSeparator/ListSeparator';
 
-const Home = ({navigation}) => {
+const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
+
+  const { name } = route.params;
+  console.log(name)
 
   const getPosts = async () => {
     try {
@@ -39,14 +43,15 @@ const Home = ({navigation}) => {
       {post.length > 0 && (
         <>
           <Header hasTitle={false} />
-          <Screen>
+          <>
             <TitleContainer>
               <Center>
-                <Title title="Olá Flamarion" />
+                <Title title={`Olá, ${name}`} />
               </Center>
             </TitleContainer>
             <PostsContainer>
               <FlatList
+                ItemSeparatorComponent={ListSeparator}
                 data={post}
                 keyExtractor={item => `${item.id}`}
                 renderItem={item => <Posts post={item} />}
@@ -62,7 +67,7 @@ const Home = ({navigation}) => {
                 <Icon name="plus" color="#fff" size={20} />
               </RoundedIconContainer>
             </AddMusicContainer>
-          </Screen>
+          </>
         </>
       )}
     </>
