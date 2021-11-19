@@ -18,7 +18,8 @@ import {
   TitleContainer,
 } from './styledComponents';
 
-const SignupMusic = ({navigation}) => {
+const SignupMusic = ({route, navigation}) => {
+  const {user} = route.params;
   const [photo, setPhoto] = useState(null);
   const [imgBase64, setImgBase64] = useState('');
   const [game, setGame] = useState('');
@@ -54,7 +55,7 @@ const SignupMusic = ({navigation}) => {
         imagem: imgBase64,
         jogo: game,
         descricao: description || null,
-        autor: 'Flamarion',
+        autor: user.nome
       });
 
       console.log(response);

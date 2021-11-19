@@ -63,7 +63,7 @@ const Home = ({route, navigation}) => {
                 size={50}
                 backgroundColor={Colors.primaryColor}
                 onPress={() => {
-                  navigation.navigate('SignupMusic');
+                  navigation.navigate('SignupMusic', {user: user});
                 }}>
                 <Icon name="plus" color="#fff" size={20} />
               </RoundedIconContainer>
