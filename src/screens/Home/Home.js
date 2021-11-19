@@ -19,7 +19,7 @@ import ListSeparator from 'components/ListSeparator/ListSeparator';
 const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
 
-  // const {user} = route.params;
+  const {user} = route.params;
   console.log(name);
 
   const getPosts = async () => {
@@ -44,7 +44,7 @@ const Home = ({route, navigation}) => {
           <>
             <TitleContainer>
               <Center>
-                <Title title={`Olá, fff`} />
+                <Title title={`Olá, ${user.nome}`} />
               </Center>
             </TitleContainer>
             <PostsContainer>

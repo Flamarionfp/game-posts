@@ -52,7 +52,7 @@ const Login = ({navigation}) => {
       setEmailError({hasError: false, msg: ''});
       setPasswordError({hasError: false, msg: ''});
       setHasError({status: false, msg: ''});
-      navigation.navigate('Home');
+      navigation.navigate('Home', {user: response.data.data});
     } else {
       setEmailError({hasError: false, msg: ''});
       setPasswordError({hasError: false, msg: ''});
