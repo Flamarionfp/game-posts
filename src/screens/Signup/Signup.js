@@ -48,6 +48,11 @@ const Signup = ({navigation}) => {
       return;
     }
 
+    if (senha.length < 8) {
+      setErrors({senha: 'Sua senha deve ter no mínimo 8 caracteres'});
+      return;
+    }
+
     if (confirmarSenha.length === 0) {
       console.log('entrou aqui');
       setErrors({confirmarSenha: 'O campo confirmar senha é obrigatório'});
@@ -63,6 +68,7 @@ const Signup = ({navigation}) => {
       setIsLoading(true);
       const response = await api.post('signup', data);
       console.log(response);
+      console.log(response);
       if (response.data.success) {
         setErrors({});
         setHasError({status: false, msg: ''});
@@ -73,6 +79,7 @@ const Signup = ({navigation}) => {
       }
     } catch (error) {
       console.log(error);
+      setHasError({status: true, msg: 'Erro ao cadastrar'});
     } finally {
       setIsLoading(false);
     }

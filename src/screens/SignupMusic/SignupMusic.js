@@ -6,7 +6,9 @@ import Header from 'components/Header/Header';
 import Title from 'components/Title/Title';
 import Field from 'components/Inputs/Field';
 import Link from 'components/Link/Link';
+import Success from 'components/Success/Success';
 import Button from 'components/Button/Button';
+import Dialog from 'components/Dialog/Dialog';
 import {Center} from 'styles/globalStyledComponents';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {InputContainer} from 'styles/globalStyledComponents';
@@ -25,7 +27,9 @@ const SignupMusic = ({route, navigation}) => {
   const [game, setGame] = useState('');
   const [description, setDescription] = useState('');
   const [isButtonEnable, setIsButtonEnable] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const uploadImage = data => {
     if (data.didCancel) {
@@ -52,7 +56,7 @@ const SignupMusic = ({route, navigation}) => {
 
   const signupPost = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await api.post('signuppost', {
         imagem: imgBase64,
         jogo: game,
@@ -61,10 +65,20 @@ const SignupMusic = ({route, navigation}) => {
       });
 
       console.log(response);
+      if (response.data.success) {
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3000)
+      } else {
+        setSuccess(false);
+        setIsModalOpen(true);
+      }
     } catch (error) {
-      console.log(error);
+      setSuccess(false);
+      setIsModalOpen(true);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -125,6 +139,9 @@ const SignupMusic = ({route, navigation}) => {
           />
         </InputContainer>
 
+        {success && <Success msg="Post cadastrado com sucesso!" />}
+         
+
         <ContainerButton>
           <Button
             isLoading={isLoading}
@@ -136,6 +153,18 @@ const SignupMusic = ({route, navigation}) => {
           />
         </ContainerButton>
       </View>
+
+      {/* Modal - just for errors */}
+      <Dialog
+        isOpen={isModalOpen}
+        type="error"
+        title="Falha ao enviar postagem!"
+        message="Ocorreu um erro ao cadastrar seu post."
+        okText="Tentar novamente"
+        onOk={() => {
+          setIsModalOpen(false);
+        }}
+      />
     </Screen>
   );
 };

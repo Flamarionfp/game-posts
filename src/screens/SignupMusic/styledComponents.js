@@ -13,5 +13,6 @@ export const ImageUploadContainer = styled(TouchableOpacity)({
 });
 
 export const ContainerButton = styled(View)({
-  marginVertical: 30,
+  marginBottom: 30,
+  marginTop: 15,
 });

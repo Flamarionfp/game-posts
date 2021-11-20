@@ -59,7 +59,11 @@ const Posts = ({post}) => {
         </ContainerDescription>
       ) : null}
 
-      {descricao.length < 255 && <Text>{descricao}</Text>}
+      {descricao.length < 255 && (
+        <ContainerDescription>
+          <Text>{descricao}</Text>
+        </ContainerDescription>
+      )}
     </>
   );
 };

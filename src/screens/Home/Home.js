@@ -16,6 +16,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import api from 'services/api';
 import EmptyData from './EmptyData';
 import ListSeparator from 'components/ListSeparator/ListSeparator';
+import { capitalize } from '@brazilian-utils/brazilian-utils';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
@@ -41,7 +43,10 @@ const Home = ({route, navigation}) => {
       <Header hasTitle={false} />
       <TitleContainer>
         <Center>
-          <Title title={`Olá, ${user.nome}`} />
+          <Title title={`Olá, ${capitalize(user.nome)}`} />
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Title title="Sair" color={Colors.primaryColor} />
+          </TouchableOpacity>
         </Center>
       </TitleContainer>
       <PostsContainer>
@@ -51,7 +56,7 @@ const Home = ({route, navigation}) => {
           renderItem={item => <Posts post={item} />}
           ItemSeparatorComponent={ListSeparator}
           ListEmptyComponent={() => <EmptyData />}
-          ListFooterComponent={<View style={{height: 0, marginBottom: 200}} />}
+          ListFooterComponent={<View style={{height: 0, marginBottom: 220}} />}
         />
       </PostsContainer>
 
