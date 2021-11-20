@@ -7,7 +7,7 @@ import Login from 'screens/Login/Login';
 import Signup from 'screens/Signup/Signup';
 import ForgotPassword from 'screens/ForgotPassword/ForgotPassword';
 import Home from 'screens/Home/Home';
-import SignupMusic from 'screens/SignupMusic/SignupMusic';
+import SignupPost from 'screens/SignupPost/SignupPost';
 
 import HeaderOptions from 'constants/HeaderOptions';
 
@@ -36,8 +36,8 @@ export const Routes = ({}) => {
         />
         <Stack.Screen name="Home" component={Home} options={HeaderOptions} />
         <Stack.Screen
-          name="SignupMusic"
-          component={SignupMusic}
+          name="SignupPost"
+          component={SignupPost}
           options={HeaderOptions}
         />
       </Stack.Navigator>

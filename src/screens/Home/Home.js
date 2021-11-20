@@ -20,20 +20,20 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const {user} = route.params;
 
   const getPosts = async () => {
     try {
-      setIsLoading(true);
+      // setIsLoading(true);
       const response = await api.get('getposts');
       console.log(response.data.post);
       setPost(response.data.post);
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
@@ -41,10 +41,10 @@ const Home = ({route, navigation}) => {
     getPosts();
   }, []);
 
-  const onRefresh = () => {
-    setIsLoading(true);
-    getPosts();
-  };
+  // const onRefresh = () => {
+  //   setIsLoading(true);
+  //   getPosts();
+  // };
 
   return (
     <>
@@ -62,8 +62,8 @@ const Home = ({route, navigation}) => {
           data={post}
           keyExtractor={item => `${item.id}`}
           renderItem={item => <Posts post={item} />}
-          refreshing={isLoading}
-          onRefresh={onRefresh}
+          // refreshing={isLoading}
+          // onRefresh={onRefresh}
           ItemSeparatorComponent={ListSeparator}
           ListEmptyComponent={() => <EmptyData />}
           ListFooterComponent={<View style={{height: 0, marginBottom: 220}} />}
@@ -75,7 +75,7 @@ const Home = ({route, navigation}) => {
           size={50}
           backgroundColor={Colors.primaryColor}
           onPress={() => {
-            navigation.navigate('SignupMusic', {user: user});
+            navigation.navigate('SignupPost', {user: user});
           }}>
           <Icon name="plus" color="#fff" size={20} />
         </RoundedIconContainer>

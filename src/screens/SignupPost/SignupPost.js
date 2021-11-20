@@ -13,7 +13,7 @@ import api from 'services/api';
 const ImagePicker = require('react-native-image-picker');
 import {ContainerButton, ImageUploadContainer} from './styledComponents';
 
-const SignupMusic = ({route, navigation}) => {
+const SignupPost = ({route, navigation}) => {
   const {user} = route.params;
   const [photo, setPhoto] = useState(null);
   const [imgBase64, setImgBase64] = useState('');
@@ -159,4 +159,4 @@ const SignupMusic = ({route, navigation}) => {
   );
 };
 
-export default SignupMusic;
+export default SignupPost;
