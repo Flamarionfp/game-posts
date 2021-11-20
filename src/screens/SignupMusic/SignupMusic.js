@@ -25,6 +25,7 @@ const SignupMusic = ({route, navigation}) => {
   const [game, setGame] = useState('');
   const [description, setDescription] = useState('');
   const [isButtonEnable, setIsButtonEnable] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const uploadImage = data => {
     if (data.didCancel) {
@@ -51,6 +52,7 @@ const SignupMusic = ({route, navigation}) => {
 
   const signupPost = async () => {
     try {
+      setIsLoading(true)
       const response = await api.post('signuppost', {
         imagem: imgBase64,
         jogo: game,
@@ -62,7 +64,7 @@ const SignupMusic = ({route, navigation}) => {
     } catch (error) {
       console.log(error);
     } finally {
-      console.log('aqui será o loading')
+      setIsLoading(false)
     }
   };
 
@@ -125,6 +127,7 @@ const SignupMusic = ({route, navigation}) => {
 
         <ContainerButton>
           <Button
+            isLoading={isLoading}
             disabled={!isButtonEnable}
             title="Enviar"
             onFunction={() => {
