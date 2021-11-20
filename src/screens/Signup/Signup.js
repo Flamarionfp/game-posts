@@ -30,6 +30,7 @@ const Signup = ({navigation}) => {
   const [errors, setErrors] = useState({});
   const [hasError, setHasError] = useState({status: false, msg: ''});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const signupUser = async () => {
     if (!data.nome) {
@@ -58,15 +59,22 @@ const Signup = ({navigation}) => {
       return;
     }
 
-    const response = await api.post('signup', data);
-    console.log(response);
-    if (response.data.success) {
-      setErrors({});
-      setHasError({status: false, msg: ''});
-      setIsModalOpen(true);
-    } else {
-      setErrors({});
-      setHasError({status: true, msg: 'Erro ao cadastrar'});
+    try {
+      setIsLoading(true);
+      const response = await api.post('signup', data);
+      console.log(response);
+      if (response.data.success) {
+        setErrors({});
+        setHasError({status: false, msg: ''});
+        setIsModalOpen(true);
+      } else {
+        setErrors({});
+        setHasError({status: true, msg: 'Erro ao cadastrar'});
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -143,6 +151,7 @@ const Signup = ({navigation}) => {
 
           <ButtonContainer>
             <Button
+              isLoading={isLoading}
               title="CADASTRAR"
               onFunction={() => {
                 signupUser();

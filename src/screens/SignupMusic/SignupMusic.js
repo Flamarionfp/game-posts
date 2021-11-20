@@ -61,6 +61,8 @@ const SignupMusic = ({route, navigation}) => {
       console.log(response);
     } catch (error) {
       console.log(error);
+    } finally {
+      console.log('aqui será o loading')
     }
   };
 
