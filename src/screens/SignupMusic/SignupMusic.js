@@ -55,7 +55,7 @@ const SignupMusic = ({route, navigation}) => {
         imagem: imgBase64,
         jogo: game,
         descricao: description || null,
-        autor: user.nome
+        autor: user.nome,
       });
 
       console.log(response);

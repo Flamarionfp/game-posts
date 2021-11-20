@@ -30,6 +30,7 @@ export const DefaultText = styled(Text)(props => ({
   color: props.color || '#000',
   fontSize: props.fontSize || 16,
   fontWeight: props.fontWeight || 'normal',
+  textAlign: props.textAlign || null,
 }));
 
 export const ButtonContainer = styled(View)({

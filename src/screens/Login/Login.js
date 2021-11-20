@@ -35,6 +35,8 @@ const Login = ({navigation}) => {
     msg: '',
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const login = async () => {
     if (validateEmail(data.email).hasError) {
       setEmailError({hasError: true, msg: validateEmail(data.email).msg});
@@ -46,17 +48,24 @@ const Login = ({navigation}) => {
       return;
     }
 
-    const response = await api.post('login', data);
-    if (response.data.success) {
-      console.log(response)
-      setEmailError({hasError: false, msg: ''});
-      setPasswordError({hasError: false, msg: ''});
-      setHasError({status: false, msg: ''});
-      navigation.navigate('Home', {user: response.data.data});
-    } else {
-      setEmailError({hasError: false, msg: ''});
-      setPasswordError({hasError: false, msg: ''});
-      setHasError({status: true, msg: response.data.msg});
+    try {
+      setIsLoading(true);
+      const response = await api.post('login', data);
+      if (response.data.success) {
+        console.log(response);
+        setEmailError({hasError: false, msg: ''});
+        setPasswordError({hasError: false, msg: ''});
+        setHasError({status: false, msg: ''});
+        navigation.navigate('Home', {user: response.data.data});
+      } else {
+        setEmailError({hasError: false, msg: ''});
+        setPasswordError({hasError: false, msg: ''});
+        setHasError({status: true, msg: response.data.msg});
+      }
+    } catch (error) {
+      setHasError({status: true, msg: 'Ocorreu um erro ao logar'});
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -103,6 +112,7 @@ const Login = ({navigation}) => {
 
           <ButtonContainer>
             <Button
+              isLoading={isLoading}
               onFunction={() => {
                 login();
               }}

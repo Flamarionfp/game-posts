@@ -14,13 +14,13 @@ import {
 import {Colors} from 'constants/Colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 import api from 'services/api';
+import EmptyData from './EmptyData';
 import ListSeparator from 'components/ListSeparator/ListSeparator';
 
 const Home = ({route, navigation}) => {
   const [post, setPost] = useState([]);
 
   const {user} = route.params;
-  console.log(name);
 
   const getPosts = async () => {
     try {
@@ -38,39 +38,33 @@ const Home = ({route, navigation}) => {
 
   return (
     <>
-      {post.length > 0 && (
-        <>
-          <Header hasTitle={false} />
-          <>
-            <TitleContainer>
-              <Center>
-                <Title title={`Olá, ${user.nome}`} />
-              </Center>
-            </TitleContainer>
-            <PostsContainer>
-              <FlatList
-                data={post}
-                keyExtractor={item => `${item.id}`}
-                renderItem={item => <Posts post={item} />}
-                ItemSeparatorComponent={ListSeparator}
-                ListFooterComponent={
-                  <View style={{height: 0, marginBottom: 200}} />
-                }
-              />
-            </PostsContainer>
-            <AddMusicContainer>
-              <RoundedIconContainer
-                size={50}
-                backgroundColor={Colors.primaryColor}
-                onPress={() => {
-                  navigation.navigate('SignupMusic', {user: user});
-                }}>
-                <Icon name="plus" color="#fff" size={20} />
-              </RoundedIconContainer>
-            </AddMusicContainer>
-          </>
-        </>
-      )}
+      <Header hasTitle={false} />
+      <TitleContainer>
+        <Center>
+          <Title title={`Olá, ${user.nome}`} />
+        </Center>
+      </TitleContainer>
+      <PostsContainer>
+        <FlatList
+          data={post}
+          keyExtractor={item => `${item.id}`}
+          renderItem={item => <Posts post={item} />}
+          ItemSeparatorComponent={ListSeparator}
+          ListEmptyComponent={() => <EmptyData />}
+          ListFooterComponent={<View style={{height: 0, marginBottom: 200}} />}
+        />
+      </PostsContainer>
+
+      <AddMusicContainer>
+        <RoundedIconContainer
+          size={50}
+          backgroundColor={Colors.primaryColor}
+          onPress={() => {
+            navigation.navigate('SignupMusic', {user: user});
+          }}>
+          <Icon name="plus" color="#fff" size={20} />
+        </RoundedIconContainer>
+      </AddMusicContainer>
     </>
   );
 };

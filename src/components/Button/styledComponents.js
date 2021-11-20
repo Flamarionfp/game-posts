@@ -7,6 +7,7 @@ import {TouchableOpacity, Text} from 'react-native';
 import {Colors} from 'constants/Colors';
 
 export const Container = styled(TouchableOpacity)(props => ({
+  flexDirection: 'row',
   backgroundColor: props.bg || Colors.primaryColor,
   height: 50,
   borderRadius: 8,

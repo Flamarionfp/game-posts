@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {View} from 'react-native';
+import {Center, DefaultText} from 'styles/globalStyledComponents';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const EmptyState = () => {
+const EmptyData = () => {
   return (
-    <View>
-      <Text>Aqui será a mensagem de vazio</Text>
-    </View>
-  )
-}
+    <>
+      
+    </>
+  );
+};
 
-export default EmptyState;
+export default EmptyData;
