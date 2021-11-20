@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View} from 'react-native';
 import {
   Center,
   ContainerRow,
@@ -7,7 +7,6 @@ import {
   InputContainer,
   ButtonContainer,
 } from 'styles/globalStyledComponents';
-import {Formik} from 'formik';
 import Screen from 'components/Screen';
 import Header from 'components/Header/Header';
 import Field from 'components/Inputs/Field';
@@ -48,7 +47,7 @@ const Signup = ({navigation}) => {
       return;
     }
 
-    if (senha.length < 8) {
+    if (data.senha.length < 8) {
       setErrors({senha: 'Sua senha deve ter no mínimo 8 caracteres'});
       return;
     }
@@ -67,19 +66,18 @@ const Signup = ({navigation}) => {
     try {
       setIsLoading(true);
       const response = await api.post('signup', data);
-      console.log(response);
-      console.log(response);
       if (response.data.success) {
         setErrors({});
         setHasError({status: false, msg: ''});
+        setIsLoading(false);
         setIsModalOpen(true);
       } else {
         setErrors({});
         setHasError({status: true, msg: 'Erro ao cadastrar'});
       }
     } catch (error) {
-      console.log(error);
       setHasError({status: true, msg: 'Erro ao cadastrar'});
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

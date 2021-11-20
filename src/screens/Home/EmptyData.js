@@ -1,8 +1,6 @@
 import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
-import {Center, DefaultText} from 'styles/globalStyledComponents';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Colors } from 'constants/Colors';
+import {Colors} from 'constants/Colors';
 
 const EmptyData = () => {
   return (

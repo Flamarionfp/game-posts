@@ -45,6 +45,11 @@ const Dialog = ({
           icon: 'help',
           color: '#2D2E96',
         };
+      case 'question_success':
+        return {
+          icon: 'check-circle',
+          color: '#4aa162',
+        };
       default:
         return '';
     }
@@ -71,14 +76,19 @@ const Dialog = ({
           <Title customMargin={type === 'default' ? 0 : 10}>{title}</Title>
         </TitleContainer>
         {typeof message === 'string' ? <Message>{message}</Message> : children}
-        {type === 'question' ? (
+        {type === 'question' || type === 'question_success' ? (
           <DialogButtonsContainer>
             <Button onFunction={onOk} title={okText || 'Sim'} />
             <Button onFunction={onCancel} title={cancelText || 'Não'} />
           </DialogButtonsContainer>
         ) : (
           <ContainerSingleButton>
-            <Button size={17} bg="#000" onFunction={onOk} title={okText || 'Ok'} />
+            <Button
+              size={17}
+              bg="#000"
+              onFunction={onOk}
+              title={okText || 'Ok'}
+            />
           </ContainerSingleButton>
         )}
       </ModalContainer>

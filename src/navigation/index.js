@@ -1,12 +1,5 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import React from 'react';
-import {Button} from 'react-native';
-
 import {createStackNavigator} from '@react-navigation/stack';
-
 import {NavigationContainer} from '@react-navigation/native';
 
 // Screens

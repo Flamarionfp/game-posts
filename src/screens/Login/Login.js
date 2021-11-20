@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View} from 'react-native';
 import {
   Center,
   ContainerRow,
@@ -103,10 +103,6 @@ const Login = ({navigation}) => {
           {passwordError.hasError && (
             <ErrorMsg isValidation msg={passwordError.msg} />
           )}
-
-          {/* <Center>
-            <Link onFunction={() => navigation.navigate('ForgotPassword')} text="Esqueci minha Senha"/>
-          </Center> */}
 
           {hasError.status && <ErrorMsg msg={hasError.msg} />}
 

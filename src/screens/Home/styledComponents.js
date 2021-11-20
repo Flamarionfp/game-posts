@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 import {View, TouchableOpacity, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Colors} from 'constants/Colors';
-import {generateShadow} from 'helpers/generateShadow';
 
 export const TitleContainer = styled(View)({
   marginVertical: 30,

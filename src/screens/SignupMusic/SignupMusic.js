@@ -1,12 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Dimensions, Image, View} from 'react-native';
-import {Formik} from 'formik';
+import {Image, View} from 'react-native';
 import Screen from 'components/Screen';
-import Header from 'components/Header/Header';
 import Title from 'components/Title/Title';
 import Field from 'components/Inputs/Field';
-import Link from 'components/Link/Link';
-import Success from 'components/Success/Success';
+import ErrorMsg from 'components/Error/ErrorMsg';
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
 import {Center} from 'styles/globalStyledComponents';
@@ -14,11 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {InputContainer} from 'styles/globalStyledComponents';
 import api from 'services/api';
 const ImagePicker = require('react-native-image-picker');
-import {
-  ContainerButton,
-  ImageUploadContainer,
-  TitleContainer,
-} from './styledComponents';
+import {ContainerButton, ImageUploadContainer} from './styledComponents';
 
 const SignupMusic = ({route, navigation}) => {
   const {user} = route.params;
@@ -29,7 +22,7 @@ const SignupMusic = ({route, navigation}) => {
   const [isButtonEnable, setIsButtonEnable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const uploadImage = data => {
     if (data.didCancel) {
@@ -66,17 +59,13 @@ const SignupMusic = ({route, navigation}) => {
 
       console.log(response);
       if (response.data.success) {
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000)
-      } else {
-        setSuccess(false);
+        setError(false);
         setIsModalOpen(true);
+      } else {
+        setError(true);
       }
     } catch (error) {
-      setSuccess(false);
-      setIsModalOpen(true);
+      setError(true);
     } finally {
       setIsLoading(false);
     }
@@ -139,8 +128,7 @@ const SignupMusic = ({route, navigation}) => {
           />
         </InputContainer>
 
-        {success && <Success msg="Post cadastrado com sucesso!" />}
-         
+        {error && <ErrorMsg msg="Falha ao cadastrar!" />}
 
         <ContainerButton>
           <Button
@@ -154,15 +142,17 @@ const SignupMusic = ({route, navigation}) => {
         </ContainerButton>
       </View>
 
-      {/* Modal - just for errors */}
+      {/* Modal - just for success */}
       <Dialog
         isOpen={isModalOpen}
-        type="error"
-        title="Falha ao enviar postagem!"
-        message="Ocorreu um erro ao cadastrar seu post."
-        okText="Tentar novamente"
+        type="question_success"
+        title="Post cadastrado com sucesso!"
+        message="Deseja cadastrar outro post?"
         onOk={() => {
           setIsModalOpen(false);
+        }}
+        onCancel={() => {
+          navigation.navigate('Home');
         }}
       />
     </Screen>

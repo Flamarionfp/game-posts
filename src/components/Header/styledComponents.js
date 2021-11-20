@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import styled from 'styled-components';
 import {Image} from 'react-native';
 import {Center} from 'styles/globalStyledComponents';

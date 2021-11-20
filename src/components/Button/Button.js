@@ -18,7 +18,9 @@ const Button = ({
       activeOpacity={disabled ? 1 : 0.7}
       onPress={!disabled ? onFunction : () => {}}>
       <Title size={size}>{title}</Title>
-      {isLoading && <ActivityIndicator style={{marginLeft: 10}} size="small" color="#fff" />}
+      {isLoading && (
+        <ActivityIndicator style={{marginLeft: 10}} size="small" color="#fff" />
+      )}
     </Container>
   );
 };

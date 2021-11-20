@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {LinkText} from './styledComponents';
