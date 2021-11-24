@@ -13,4 +13,5 @@ export const ContainerImage = styled(Center)({
 export const Logo = styled(Image)({
   width: 80,
   height: 80,
+  borderRadius: 80,
 });

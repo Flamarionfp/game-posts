@@ -16,7 +16,7 @@ const Header = ({
       ) : null}
       {hasLogo ? (
         <ContainerImage>
-          <Logo source={require('../../../assets/image/logoGame.png')} />
+          <Logo source={require('../../../assets/image/logoGame.jpg')} />
         </ContainerImage>
       ) : null}
     </>
