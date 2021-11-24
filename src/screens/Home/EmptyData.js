@@ -4,7 +4,7 @@ import {Colors} from 'constants/Colors';
 
 const EmptyData = () => {
   return (
-    <View>
+    <View style={{marginTop: 20}}>
       <ActivityIndicator size="large" color={Colors.primaryColor} />
     </View>
   );

@@ -148,6 +148,8 @@ const SignupPost = ({route, navigation}) => {
         type="question_success"
         title="Post cadastrado com sucesso!"
         message="Deseja cadastrar outro post?"
+        okText="Sim"
+        cancelText="Não"
         onOk={() => {
           setIsModalOpen(false);
         }}

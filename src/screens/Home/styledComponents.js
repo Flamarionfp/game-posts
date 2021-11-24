@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {View, TouchableOpacity, Text} from 'react-native';
 
 export const TitleContainer = styled(View)({
-  marginVertical: 30,
+  marginTop: 30,
 });
 
 export const Author = styled(Text)({

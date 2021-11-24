@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, Dimensions} from 'react-native';
 import {
   Center,
   ContainerRow,
@@ -69,6 +69,8 @@ const Login = ({navigation}) => {
     }
   };
 
+  const maxWidth = 411.42857142857144;
+
   return (
     <>
       <Screen position="center">
@@ -117,15 +119,29 @@ const Login = ({navigation}) => {
           </ButtonContainer>
 
           <Center>
-            <ContainerRow>
-              <DefaultText>Ainda não possui sua conta? </DefaultText>
-              <Link
-                onFunction={() => {
-                  navigation.navigate('Signup');
-                }}
-                text="Clique aqui"
-              />
-            </ContainerRow>
+            {Dimensions.get('window').width <= maxWidth ? (
+              <>
+                <ContainerRow>
+                  <DefaultText>Ainda não possui sua conta? </DefaultText>
+                  <Link
+                    onFunction={() => {
+                      navigation.navigate('Signup');
+                    }}
+                    text="Clique aqui"
+                  />
+                </ContainerRow>
+              </>
+            ) : (
+              <>
+                <DefaultText>Ainda não possui sua conta? </DefaultText>
+                <Link
+                  onFunction={() => {
+                    navigation.navigate('Signup');
+                  }}
+                  text="Clique aqui"
+                />
+              </>
+            )}
           </Center>
         </View>
       </Screen>

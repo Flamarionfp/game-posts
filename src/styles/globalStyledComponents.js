@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {View, Text} from 'react-native';
+import {widthToDp} from 'helpers/convertDimension'
 
 export const ContainerRow = styled(View)({
   flexDirection: 'row',
@@ -28,7 +29,7 @@ export const InputContainer = styled(View)({
 
 export const DefaultText = styled(Text)(props => ({
   color: props.color || '#000',
-  fontSize: props.fontSize || 16,
+  fontSize: props.fontSize || widthToDp(4),
   fontWeight: props.fontWeight || 'normal',
   textAlign: props.textAlign || null,
 }));

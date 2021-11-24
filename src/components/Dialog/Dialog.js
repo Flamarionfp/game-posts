@@ -10,6 +10,7 @@ import {
   ContainerSingleButton,
   DialogButtonsContainer,
 } from './styledComponents';
+import {Colors} from 'constants/Colors'
 
 const Dialog = ({
   type = 'default',
@@ -61,7 +62,10 @@ const Dialog = ({
       animationIn="fadeIn"
       animationOut="fadeOut"
       onBackdropPress={closeOnBackdropPress ? onCancel : () => {}}>
-      <ModalContainer>
+      <ModalContainer
+        isDialog={
+          type === 'question' || type === 'question_success' ? true : false
+        }>
         {type !== 'default' ? (
           <Icon
             name={getIcon().icon}
@@ -78,8 +82,8 @@ const Dialog = ({
         {typeof message === 'string' ? <Message>{message}</Message> : children}
         {type === 'question' || type === 'question_success' ? (
           <DialogButtonsContainer>
-            <Button onFunction={onOk} title={okText || 'Sim'} />
-            <Button onFunction={onCancel} title={cancelText || 'Não'} />
+            <Button bg="black" style={{marginBottom: 10}} onFunction={onOk} title={okText || 'Sim'} />
+            <Button bg={Colors.dangerColor} onFunction={onCancel} title={cancelText || 'Não'} />
           </DialogButtonsContainer>
         ) : (
           <ContainerSingleButton>

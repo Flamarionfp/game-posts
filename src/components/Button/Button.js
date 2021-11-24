@@ -10,13 +10,15 @@ const Button = ({
   disabled = false,
   size,
   isLoading = false,
+  style,
 }) => {
   return (
     <Container
       disabled={disabled || isLoading}
       bg={bg}
       activeOpacity={disabled ? 1 : 0.7}
-      onPress={!disabled ? onFunction : () => {}}>
+      onPress={!disabled ? onFunction : () => {}}
+      style={style}>
       <Title size={size}>{title}</Title>
       {isLoading && (
         <ActivityIndicator style={{marginLeft: 10}} size="small" color="#fff" />
