@@ -151,6 +151,9 @@ const SignupPost = ({route, navigation}) => {
         okText="Sim"
         cancelText="Não"
         onOk={() => {
+          setPhoto(null);
+          setGame('');
+          setDescription('');
           setIsModalOpen(false);
         }}
         onCancel={() => {

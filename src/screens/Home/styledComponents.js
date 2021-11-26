@@ -21,7 +21,7 @@ export const ImageContainer = styled(View)({
 });
 
 export const ContainerDescription = styled(View)({
-  marginHorizontal: 5,
+  marginHorizontal: 6,
 });
 
 export const PostsContainer = styled(View)({

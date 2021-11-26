@@ -35,7 +35,7 @@ const Posts = ({post}) => {
         />
       </ImageContainer>
 
-      {descricao.length > 255 && !seeMore && (
+      {descricao && descricao.length > 255 && !seeMore && (
         <ContainerDescription>
           <Text>{`${descricao.substring(0, 255)}`}</Text>
           <TouchableOpacity
@@ -47,7 +47,7 @@ const Posts = ({post}) => {
         </ContainerDescription>
       )}
 
-      {descricao.length > 255 && seeMore ? (
+      {descricao && descricao.length > 255 && seeMore ? (
         <ContainerDescription>
           <Text>{descricao}</Text>
           <TouchableOpacity
@@ -59,7 +59,7 @@ const Posts = ({post}) => {
         </ContainerDescription>
       ) : null}
 
-      {descricao.length < 255 && (
+      {descricao && descricao.length < 255 && (
         <ContainerDescription>
           <Text>{descricao}</Text>
         </ContainerDescription>

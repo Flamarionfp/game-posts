@@ -50,8 +50,6 @@ const Home = ({route, navigation}) => {
     getPosts();
   }, []);
 
-
-
   return (
     <>
       {!isLoading ? (
