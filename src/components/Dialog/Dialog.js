@@ -4,13 +4,14 @@ import Button from 'components/Button/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   ModalContainer,
+  IconContainer,
   TitleContainer,
   Title,
   Message,
   ContainerSingleButton,
   DialogButtonsContainer,
 } from './styledComponents';
-import {Colors} from 'constants/Colors'
+import {Colors} from 'constants/Colors';
 
 const Dialog = ({
   type = 'default',
@@ -67,14 +68,16 @@ const Dialog = ({
           type === 'question' || type === 'question_success' ? true : false
         }>
         {type !== 'default' ? (
-          <Icon
-            name={getIcon().icon}
-            size={70}
-            color={getIcon().color}
-            iconSet={
-              type === 'question' ? 'MaterialIcons' : 'MaterialCommunityIcons'
-            }
-          />
+          <IconContainer>
+            <Icon
+              name={getIcon().icon}
+              size={70}
+              color={getIcon().color}
+              iconSet={
+                type === 'question' ? 'MaterialIcons' : 'MaterialCommunityIcons'
+              }
+            />
+          </IconContainer>
         ) : null}
         <TitleContainer>
           <Title customMargin={type === 'default' ? 0 : 10}>{title}</Title>
@@ -82,8 +85,17 @@ const Dialog = ({
         {typeof message === 'string' ? <Message>{message}</Message> : children}
         {type === 'question' || type === 'question_success' ? (
           <DialogButtonsContainer>
-            <Button bg="black" style={{marginBottom: 10}} onFunction={onOk} title={okText || 'Sim'} />
-            <Button bg={Colors.dangerColor} onFunction={onCancel} title={cancelText || 'Não'} />
+            <Button
+              bg="black"
+              style={{marginBottom: 10}}
+              onFunction={onOk}
+              title={okText || 'Sim'}
+            />
+            <Button
+              bg={Colors.dangerColor}
+              onFunction={onCancel}
+              title={cancelText || 'Não'}
+            />
           </DialogButtonsContainer>
         ) : (
           <ContainerSingleButton>

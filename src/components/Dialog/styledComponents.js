@@ -10,6 +10,10 @@ export const ModalContainer = styled(View)(props => ({
   paddingVertical: 25,
 }));
 
+export const IconContainer = styled(View)({
+  alignItems: 'center',
+});
+
 export const TitleContainer = styled(View)({
   marginHorizontal: 20,
 });
@@ -39,5 +43,6 @@ export const DialogButtonsContainer = styled(View)({
 export const ContainerSingleButton = styled(View)({
   marginTop: 20,
   paddingVertical: 5,
-  width: '85%',
+  width: '100%',
+  paddingHorizontal: '10%',
 });
