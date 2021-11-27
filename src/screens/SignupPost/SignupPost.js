@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image, View} from 'react-native';
+import {Image, View, PermissionsAndroid} from 'react-native';
 import Screen from 'components/Screen';
 import Title from 'components/Title/Title';
 import Field from 'components/Inputs/Field';
@@ -23,6 +23,28 @@ const SignupPost = ({route, navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(false);
+  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+
+  const requestMediaPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          title: 'Game Posts precisa permissão para acessar suas fotos',
+          message: 'Aceite a permissão para prosseguir com o upload',
+          buttonNegative: 'Negar',
+          buttonPositive: 'Aceitar',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        setIsPermissionGranted(true);
+      } else {
+        setIsPermissionGranted(false);
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
   const uploadImage = data => {
     if (data.didCancel) {
@@ -72,6 +94,7 @@ const SignupPost = ({route, navigation}) => {
   };
 
   useEffect(() => {
+    requestMediaPermission();
     if (imgBase64.length === 0 || game.length === 0) {
       setIsButtonEnable(false);
     } else {
@@ -83,9 +106,13 @@ const SignupPost = ({route, navigation}) => {
     <Screen isScrollable center>
       <Center>
         <ImageUploadContainer
-          onPress={() =>
-            ImagePicker.launchImageLibrary(configPhoto, uploadImage)
-          }>
+          onPress={() => {
+            if (isPermissionGranted) {
+              ImagePicker.launchImageLibrary(configPhoto, uploadImage);
+            } else {
+              return;
+            }
+          }}>
           {photo ? (
             <>
               <Image
