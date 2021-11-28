@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable eslint-comments/no-unlimited-disable */
-/* eslint-disable */
-
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 import {
@@ -11,7 +7,6 @@ import {
   InputContainer,
   ButtonContainer,
 } from '../../styles/globalStyledComponents';
-import {Formik} from 'formik';
 import Screen from 'components/Screen';
 import Header from 'components/Header/Header';
 import Field from 'components/Inputs/Field';
