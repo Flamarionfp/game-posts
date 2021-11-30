@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {View, Text} from 'react-native';
-import {widthToDp} from 'helpers/convertDimension';
+import {widthToDp} from 'helpers/convertDimension'
 
 export const ContainerRow = styled(View)({
   flexDirection: 'row',
@@ -23,9 +23,9 @@ export const Flex = styled(View)(props => ({
   flex: props.flex,
 }));
 
-export const InputContainer = styled(View)(props => ({
-  marginTop: props.marginTop || 10,
-}));
+export const InputContainer = styled(View)({
+  marginTop: 10,
+});
 
 export const DefaultText = styled(Text)(props => ({
   color: props.color || '#000',
