@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
 // Screens
+import IpScreen from 'screens/IpScreen';
 import Login from 'screens/Login/Login';
 import Signup from 'screens/Signup/Signup';
 import ForgotPassword from 'screens/ForgotPassword/ForgotPassword';
@@ -16,7 +17,12 @@ const Stack = createStackNavigator();
 export const Routes = ({}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="IpScreen">
+        <Stack.Screen
+          name="IpScreen"
+          component={IpScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Login"
           component={Login}
