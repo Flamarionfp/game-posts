@@ -10,12 +10,11 @@ import {Center} from 'styles/globalStyledComponents';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {InputContainer} from 'styles/globalStyledComponents';
 import api from 'services/api';
-const ImagePicker = require('react-native-image-picker');
+import ImagePicker from 'react-native-image-crop-picker';
 import {ContainerButton, ImageUploadContainer} from './styledComponents';
 
 const SignupPost = ({route, navigation}) => {
   const {user} = route.params;
-  const [photo, setPhoto] = useState(null);
   const [imgBase64, setImgBase64] = useState('');
   const [game, setGame] = useState('');
   const [description, setDescription] = useState('');
@@ -46,27 +45,17 @@ const SignupPost = ({route, navigation}) => {
     }
   };
 
-  const uploadImage = data => {
-    if (data.didCancel) {
-      return;
-    }
-    if (data.error) {
-      return;
-    }
-
-    if (!data.assets[0].uri) {
-      return;
-    }
-
-    setPhoto(data.assets[0]);
-    setImgBase64(data.assets[0].base64);
-  };
-
-  const configPhoto = {
-    mediaType: 'photo',
-    includeBase64: true,
-    maxHeight: 300,
-    maxWidth: 300,
+  const uploadImage = () => {
+    ImagePicker.openPicker({
+      mediaType: 'photo',
+      includeBase64: true,
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+      setImgBase64(image.data);
+    });
   };
 
   const signupPost = async () => {
@@ -95,12 +84,12 @@ const SignupPost = ({route, navigation}) => {
 
   useEffect(() => {
     requestMediaPermission();
-    if (imgBase64.length === 0 || game.length === 0) {
+    if (imgBase64.length < 0 || game.length === 0) {
       setIsButtonEnable(false);
     } else {
       setIsButtonEnable(true);
     }
-  }, [imgBase64, game]);
+  }, []);
 
   return (
     <Screen isScrollable center>
@@ -108,16 +97,16 @@ const SignupPost = ({route, navigation}) => {
         <ImageUploadContainer
           onPress={() => {
             if (isPermissionGranted) {
-              ImagePicker.launchImageLibrary(configPhoto, uploadImage);
+              uploadImage();
             } else {
               return;
             }
           }}>
-          {photo ? (
+          {imgBase64 ? (
             <>
               <Image
                 style={{width: 150, height: 150, borderRadius: 6}}
-                source={{uri: photo.uri}}
+                source={{uri: `data:image/png;base64,${imgBase64}`}}
               />
               <View style={{marginHorizontal: 5, marginTop: 10}}>
                 <Title fontSize={18} title="Escolher outra imagem" />
@@ -178,7 +167,7 @@ const SignupPost = ({route, navigation}) => {
         okText="Sim"
         cancelText="Não"
         onOk={() => {
-          setPhoto(null);
+          setImgBase64(null);
           setGame('');
           setDescription('');
           setIsModalOpen(false);
