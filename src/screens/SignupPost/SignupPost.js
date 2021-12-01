@@ -84,12 +84,17 @@ const SignupPost = ({route, navigation}) => {
 
   useEffect(() => {
     requestMediaPermission();
-    if (imgBase64.length < 0 || game.length === 0) {
-      setIsButtonEnable(false);
-    } else {
+  })
+
+  useEffect(() => {
+    console.log(imgBase64)
+    console.log(game)
+    if (imgBase64 !== '' && game.length > 3) {
       setIsButtonEnable(true);
+    } else {
+      setIsButtonEnable(false);
     }
-  }, []);
+  }, [imgBase64, game]);
 
   return (
     <Screen isScrollable center>
